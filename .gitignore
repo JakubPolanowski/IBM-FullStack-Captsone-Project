@@ -143,3 +143,4 @@ server/djangoapp/migrations/
 # Ingore vscode
 .vscode
 *.sqlite3
+*.ipynb
