@@ -144,3 +144,4 @@ server/djangoapp/migrations/
 .vscode
 *.sqlite3
 *.ipynb
+*_fixture.json
