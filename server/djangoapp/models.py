@@ -53,6 +53,29 @@ class CarModel(models.Model):
         return f"Name: {self.name}, Year: {self.year}, Model: {self.car_model}"
 
 
+class CarDealer(models.Model):
+    city = models.CharField(max_length=25)
+    state = models.CharField(max_length=25)
+    st = models.CharField(max_length=2)
+    address = models.TextField()
+    zip = models.CharField(max_length=25)
+    lat = models.FloatField()
+    long = models.FloatField()
+    short_name = models.CharField(max_length=25)
+    full_name = models.TextField()
+
+
+class DealerReview(models.Model):
+    name = models.CharField(max_length=25)
+    dealership = models.ForeignKey(CarDealer, on_delete=models.CASCADE)
+    review = models.TextField()
+    purchase = models.BooleanField()
+    purchase_date = models.DateField()
+    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
+    car_year = models.models.IntegerField()
+
+
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 
 
