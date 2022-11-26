@@ -46,7 +46,7 @@ class CarModel(models.Model):
     ]
 
     car_model = models.CharField(
-        choices=CAR_CHOICES, default=SEDAN)
+        choices=CAR_CHOICES, default=SEDAN, max_length=25)
     year = models.DateField()
 
     def __str__(self):
