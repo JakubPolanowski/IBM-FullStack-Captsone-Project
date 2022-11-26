@@ -73,7 +73,7 @@ class DealerReview(models.Model):
     purchase_date = models.DateField()
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
-    car_year = models.models.IntegerField()
+    car_year = models.IntegerField()
 
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
