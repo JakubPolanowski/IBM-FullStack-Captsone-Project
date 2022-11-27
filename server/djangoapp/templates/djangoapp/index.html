@@ -44,11 +44,9 @@
           <tr>
             <td>{{dealer.id}}</td>
             <td>
-              {% comment %}
               <a href="{% url 'djangoapp:dealer_details' dealer.id %}">
-                {% endcomment %} {{dealer.full_name}} {% comment %}
+                {{dealer.full_name}}
               </a>
-              {% endcomment %}
             </td>
             <td>{{dealer.city}}</td>
             <td>{{dealer.address}}</td>
