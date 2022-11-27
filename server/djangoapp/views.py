@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
-# from .models import related models
+from .models import CarDealer, DealerReview
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -89,6 +89,8 @@ def registration_request(request):
 
 def get_dealerships(request):
     context = {}
+    context["dealers"] = CarDealer.objects.all()
+
     if request.method == "GET":
         return render(request, 'djangoapp/index.html', context)
 
