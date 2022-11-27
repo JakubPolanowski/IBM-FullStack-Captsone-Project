@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dealership Reviews</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+  </head>
 
-    <body>
+  <body>
+    {% include 'nav.html' %}
 
-    <!--Add a nav bar here -->
-
-    <!-- Add reviews as cards -->
-
-    </body>
-
+    <div class="container">
+      {% if user.is_authenticated %} {% comment %} TODO replace index with
+      add_review dealer_id {% endcomment %}
+      <a
+        href="{% url 'djangoapp:index' %}"
+        class="btn btn-primary btn-block m-3"
+        >Write a review</a
+      >
+      {% endif %}
+    </div>
+    <div class="container">
+      <h1 class="mb-3">Reviews for <b>{{dealer.full_name}}</b></h1>
+      <div class="card-deck">
+        {% for review in reviews %}
+        <div class="card">
+          <img
+            src="data:image/jpeg;base64,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"
+            class="card-img-left"
+            style="
+              float: left;
+              height: 40px;
+              width: 40px;
+              display: inline-block;
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ review.car_make.name }}, {{ review.car_model.name }}
+            </h5>
+            <h5 class="card-title">{{ review.car_year }}</h5>
+            <p class="card-text">{{ review.review }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
 </html>
