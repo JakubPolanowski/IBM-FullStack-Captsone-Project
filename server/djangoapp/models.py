@@ -70,7 +70,7 @@ class DealerReview(models.Model):
     dealership = models.ForeignKey(CarDealer, on_delete=models.CASCADE)
     review = models.TextField()
     purchase = models.BooleanField()
-    purchase_date = models.DateField()
+    purchase_date = models.TextField(max_length=25)
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
     car_year = models.IntegerField()
