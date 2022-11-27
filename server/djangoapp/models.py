@@ -59,7 +59,7 @@ class CarModel(models.Model):
 
     car_model = models.CharField(
         choices=CAR_CHOICES, default=SEDAN, max_length=25)
-    year = models.DateField()
+    year = models.IntegerField()
 
     def __str__(self):
         return f"Name: {self.name}, Year: {self.year}, Model: {self.car_model}"
