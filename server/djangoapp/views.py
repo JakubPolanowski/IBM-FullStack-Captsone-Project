@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import CarDealer, DealerReview
+from django.urls import reverse
+from .models import CarDealer, DealerReview, CarModel
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -107,5 +108,40 @@ def get_dealer_details(request, dealer_id):
     return render(request, 'djangoapp/dealer_details.html', context)
 
 # Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
-# ...
+
+
+def add_review(request, dealer_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = request.POST
+
+            car = CarModel.objects.get(pk=form["car"])
+
+            review = {
+                "name": f"{request.user.first_name} {request.user.last_name}",
+                "dealership": CarDealer.objects.get(pk=dealer_id),
+                "review": form["content"],
+                "purchase": "purchasecheck" in form,
+                "purchase_date": form["purchasedate"],
+                "car_model": car,
+                "car_make": car.car_make,
+                "car_year": car.year,
+            }
+
+            DealerReview.objects.create(**review)
+
+            return HttpResponseRedirect(reverse(
+                viewname="djangoapp:dealer_details",
+                args=(dealer_id,)
+            ))
+
+        else:
+            dealer = get_object_or_404(CarDealer, pk=dealer_id)
+            context = {
+                "cars": CarModel.objects.all(),
+                "dealer": dealer,
+            }
+
+            return render(request, "djangoapp/add_review.html", context)
+    else:
+        return redirect("/djangoapp/login")

@@ -48,7 +48,9 @@
           <label for="car">Select your car:</label>
           <select name="car" id="car" class="form-select">
             {% for car in cars %}
-            <option>{{car.car_make.name}} {{car.name}} {{ car.year }}</option>
+            <option value="{{car.id}}">
+              {{car.car_make.name}} {{car.name}} {{ car.year }}
+            </option>
             {% endfor %}
           </select>
         </div>
