@@ -26,9 +26,21 @@ class CarMake(models.Model):
 # - __str__ method to print a car make object
 
 
+class CarDealer(models.Model):
+    city = models.CharField(max_length=25)
+    state = models.CharField(max_length=25)
+    st = models.CharField(max_length=2)
+    address = models.TextField()
+    zip = models.CharField(max_length=25)
+    lat = models.FloatField()
+    long = models.FloatField()
+    short_name = models.CharField(max_length=25)
+    full_name = models.TextField()
+
+
 class CarModel(models.Model):
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    dealer_id = models.IntegerField()
+    dealer_id = models.ForeignKey(CarDealer, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     SEDAN = "Sedan"
     SUV = "SUV"
@@ -51,18 +63,6 @@ class CarModel(models.Model):
 
     def __str__(self):
         return f"Name: {self.name}, Year: {self.year}, Model: {self.car_model}"
-
-
-class CarDealer(models.Model):
-    city = models.CharField(max_length=25)
-    state = models.CharField(max_length=25)
-    st = models.CharField(max_length=2)
-    address = models.TextField()
-    zip = models.CharField(max_length=25)
-    lat = models.FloatField()
-    long = models.FloatField()
-    short_name = models.CharField(max_length=25)
-    full_name = models.TextField()
 
 
 class DealerReview(models.Model):
