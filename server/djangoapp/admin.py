@@ -8,14 +8,6 @@ from .models import CarModel, CarMake, CarDealer, DealerReview
 class CarModelInline(admin.StackedInline):
     model = CarModel
 
-
-class CarDealerInline(admin.StackedInline):
-    model = CarDealer
-
-
-class CarMakeInline(admin.StackedInline):
-    model = CarMake
-
 # CarModelAdmin class
 
 
